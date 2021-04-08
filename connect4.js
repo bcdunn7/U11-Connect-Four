@@ -21,7 +21,7 @@ function makeBoard() {
     row.push(null);
   }
   for (let i = 0; i < HEIGHT; i++){
-    board.push(row);
+    board.push(Array.from(row));
   }
   board.unshift();
 }
@@ -119,6 +119,7 @@ function checkForWin() {
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
 
+    //test through given array of four arrays of datacell points to see if they are first on the gameboard and second all the same player, return boolean
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
@@ -129,8 +130,7 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  //loop through each column (within a loop through each row) and create four possible connect four arrays which are tested above in _win
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
